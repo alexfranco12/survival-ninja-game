@@ -25,13 +25,13 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
     }
 
     static preload(scene) {
-        scene.load.spritesheet('green_ninja_idle', 'assets/images/Idle.png', 
+        scene.load.spritesheet('green_ninja_idle', 'assets/Actor/Characters/GreenNinja/SeparateAnim/Idle.png', 
         { 
             frameWidth: 16, 
             frameHeight: 16, 
             endFrame: 4 
         });
-        scene.load.spritesheet('green_ninja_walk', 'assets/images/Walk.png', 
+        scene.load.spritesheet('green_ninja_walk', 'assets//Actor/Characters/GreenNinja/SeparateAnim/Walk.png', 
         { 
             frameWidth: 16, 
             frameHeight: 16, 

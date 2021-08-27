@@ -7,24 +7,42 @@ export default class MainScene extends Phaser.Scene {
 
     preload() {
         Player.preload(this);
-        this.load.image('floor', 'assets/images/Tilesets/TilesetFloor.png');
-        this.load.image('water', 'assets/images/Tilesets/TilesetWater.png');
-        this.load.tilemapTiledJSON('map', 'assets/images/map.json')
+        this.load.image('floor', 'assets/Backgrounds/Tilesets/TilesetFloor.png');
+        this.load.image('water', 'assets/Backgrounds/Tilesets/TilesetWater.png');
+        this.load.tilemapTiledJSON('map', 'assets/map.json')
 
+        this.load.spritesheet('nature', 'assets/Backgrounds/Tilesets/TilesetNature.png', 
+        { 
+            frameWidth: 32, 
+            frameHeight: 32, 
+            endFrame: 8 
+        });
     }
 
     create() {
+        // create a tilemap
         const map = this.make.tilemap({ key: 'map' });
 
+        // create tilesets w/ .PNGs we loaded
         const tileset = map.addTilesetImage('TilesetFloor', 'floor', 16, 16, 0, 0);
         const waterTileset = map.addTilesetImage('TilesetWater', 'water', 16, 16, 0, 0);
         
-        const layer1 = map.createStaticLayer('Tile Layer 1', tileset, 0, 0);
-        const layer2 = map.createStaticLayer('Tile Layer 2', tileset, 0, 0);
-        const layer3 = map.createStaticLayer('Tile Layer 3', waterTileset, 0, 0);
+        // create variables for each layer created in TILED
+        const layer1 = map.createLayer('Tile Layer 1', tileset, 0, 0);
+        const layer2 = map.createLayer('Tile Layer 2', tileset, 0, 0);
+        const layer3 = map.createLayer('Tile Layer 3', waterTileset, 0, 0);
 
         layer3.setCollisionByProperty({ collides: true });
         this.matter.world.convertTilemapLayer(layer3);
+
+        let tree = new Phaser.Physics.Matter.Sprite(this.matter.world, 250, 100, 'nature');
+
+
+        // add nature sprites to world
+        this.add.existing(tree).setStatic(true);
+
+
+
 
         // create a new player
         this.player = new Player({
@@ -41,7 +59,7 @@ export default class MainScene extends Phaser.Scene {
             x: 200, 
             y: 200, 
             texture: 'green_ninja_idle', 
-            frame: 0
+            frame: 3
         });
         
 
