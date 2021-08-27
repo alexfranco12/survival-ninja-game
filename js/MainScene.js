@@ -7,15 +7,24 @@ export default class MainScene extends Phaser.Scene {
 
     preload() {
         Player.preload(this);
-        this.load.image('tiles', 'assets/images/TilesetFloor.png');
+        this.load.image('floor', 'assets/images/Tilesets/TilesetFloor.png');
+        this.load.image('water', 'assets/images/Tilesets/TilesetWater.png');
         this.load.tilemapTiledJSON('map', 'assets/images/map.json')
 
     }
 
     create() {
         const map = this.make.tilemap({ key: 'map' });
-        const tileset = map.addTilesetImage('TilesetFloor', 'tiles', 16, 16, 0, 0);
+
+        const tileset = map.addTilesetImage('TilesetFloor', 'floor', 16, 16, 0, 0);
+        const waterTileset = map.addTilesetImage('TilesetWater', 'water', 16, 16, 0, 0);
+        
         const layer1 = map.createStaticLayer('Tile Layer 1', tileset, 0, 0);
+        const layer2 = map.createStaticLayer('Tile Layer 2', tileset, 0, 0);
+        const layer3 = map.createStaticLayer('Tile Layer 3', waterTileset, 0, 0);
+
+        layer3.setCollisionByProperty({ collides: true });
+        this.matter.world.convertTilemapLayer(layer3);
 
         // create a new player
         this.player = new Player({
