@@ -7,11 +7,15 @@ export default class MainScene extends Phaser.Scene {
 
     preload() {
         Player.preload(this);
+        this.load.image('tiles', 'assets/images/TilesetFloor.png');
+        this.load.tilemapTiledJSON('map', 'assets/images/map.json')
 
     }
 
     create() {
-        console.log('create')
+        const map = this.make.tilemap({ key: 'map' });
+        const tileset = map.addTilesetImage('TilesetFloor', 'tiles', 16, 16, 0, 0);
+        const layer1 = map.createStaticLayer('Tile Layer 1', tileset, 0, 0);
 
         // create a new player
         this.player = new Player({
