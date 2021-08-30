@@ -49,5 +49,9 @@ export default class MatterEntity extends Phaser.Physics.Matter.Sprite {
                 y: this.y,
             })
         }
+
+        if (this.dead) {
+            this.onDeath();
+        }
     }
 }

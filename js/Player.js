@@ -218,7 +218,7 @@ export default class Player extends MatterEntity {
 
     onDeath = () => {
         this.anims.stop();
-        // this.setTexture('green_ninja_dead')
+        this.setTexture('green_ninja_dead')
         this.setOrigin(0.5);
         this.spriteWeapon.destroy();
     }
