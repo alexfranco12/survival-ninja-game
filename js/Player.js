@@ -1,9 +1,35 @@
-export default class Player extends Phaser.Physics.Matter.Sprite {
+import MatterEntity from "./MatterEntity.js";
+
+export default class Player extends MatterEntity {
+    static preload(scene) {
+        scene.load.spritesheet('green_ninja_idle', 'assets/Actor/Characters/GreenNinja/SeparateAnim/Idle.png', 
+        { 
+            frameWidth: 16, 
+            frameHeight: 16, 
+            endFrame: 4 
+        });
+        scene.load.spritesheet('green_ninja_walk', 'assets//Actor/Characters/GreenNinja/SeparateAnim/Walk.png', 
+        { 
+            frameWidth: 16, 
+            frameHeight: 16, 
+            endFrame: 16 
+        });
+
+        scene.load.audio('player', '/assets/Sounds/Game/Sword2.wav')
+        scene.load.image('axe', '/assets/Items/Weapons/Axe/sprite.png')
+        scene.load.image('green_ninja_dead', '/assets/Actor/Characters/GreenNinja/SeparateAnim/Dead.png')
+    }
+    
     constructor(data) {
         let {scene, x, y, texture, frame} = data;
+        super({
+            ...data,
+            health: 2,
+            drops: [],
+            name: 'player'
+        });
 
-        super(scene.matter.world, x, y, texture, frame);
-        this.scene.add.existing(this);
+        this.touching = [];
 
         const {Body, Bodies} = Phaser.Physics.Matter.Matter;
         let playerCollider = Bodies.circle(this.x, this.y, 12, {
@@ -22,21 +48,21 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         // stops the player from rotating when interacted with
         this.setExistingBody(compoundBody);
         this.setFixedRotation();
-    }
 
-    static preload(scene) {
-        scene.load.spritesheet('green_ninja_idle', 'assets/Actor/Characters/GreenNinja/SeparateAnim/Idle.png', 
-        { 
-            frameWidth: 16, 
-            frameHeight: 16, 
-            endFrame: 4 
-        });
-        scene.load.spritesheet('green_ninja_walk', 'assets//Actor/Characters/GreenNinja/SeparateAnim/Walk.png', 
-        { 
-            frameWidth: 16, 
-            frameHeight: 16, 
-            endFrame: 16 
-        });
+        /*
+            Sprite Weapons
+        */
+        this.spriteWeapon = new Phaser.GameObjects.Sprite(this.scene, 25, 25, 'axe');
+        this.spriteWeapon.setScale(0.8);
+        this.spriteWeapon.setOrigin(-.5, 1);
+        this.scene.add.existing(this.spriteWeapon);
+
+        this.scene.input.on('pointermove', pointer => {
+            if (!this.dead) this.setFlipX(pointer.worldX < this.x)
+        })
+
+        this.createMatterCollisions(playerSensor);
+        this.createPickupCollisions(playerCollider);
     }
 
     createAnimations() {
@@ -79,13 +105,13 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
     }
 
-    get velocity() {
-        return this.body.velocity
-    }
-
     update() {
         const speed = 2.5;
         let playerVelocity = new Phaser.Math.Vector2();
+
+        if (this.dead) {
+            return;
+        }
 
         // movement left or right
         if (this.inputKeys.left.isDown) {
@@ -116,5 +142,84 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         // } else {
         //     this.anims.play('idle', true)
         // }
+
+        this.spriteWeapon.setPosition(this.x, this.y)
+        this.weaponRotate();
+    }
+
+    weaponRotate() {
+        let pointer = this.scene.input.activePointer;
+
+        if (pointer.isDown) {
+            this.weaponRotation +=6;
+        } else {
+            this.weaponRotation = 0
+        }
+
+        if (this.weaponRotation > 100) {
+            this.whackStuff();
+            this.weaponRotation = 0
+        }
+
+        if (this.flipX) {
+            this.spriteWeapon.setAngle(-this.weaponRotation - 90);
+        } else {
+            this.spriteWeapon.setAngle(this.weaponRotation);
+        }
+
+        this.spriteWeapon.setAngle(this.weaponRotation);
+    }
+
+    createMatterCollisions(playerSensor) {
+        this.scene.matterCollision.addOnCollideStart({
+            objectA:[playerSensor],
+            callback: other => {
+                if (other.bodyB.isSensor) return;
+                this.touching.push(other.gameObjectB);
+            },
+            context: this.scene,
+        });
+
+        this.scene.matterCollision.addOnCollideEnd({
+            objectA: [playerSensor],
+            callback: other => {
+                this.touching = this.touching.filter(gameObject => gameObject != other.gameObjectB);
+            },
+            context: this.scene,
+        })
+    }
+
+    // pickup items
+    createPickupCollisions(playerCollider) {
+        this.scene.matterCollision.addOnCollideStart({
+            objectA:[playerCollider],
+            callback: other => {
+                if (other.gameObjectB && other.gameObjectB.pickup) other.gameObjectB.pickup()
+            },
+            context: this.scene,
+        });
+
+        this.scene.matterCollision.addOnCollideActive({
+            objectA: [playerCollider],
+            callback: other => {
+                if (other.gameObjectB && other.gameObjectB.pickup) other.gameObjectB.pickup()
+            },
+            context: this.scene,
+        })
+    }
+
+    whackStuff() {
+        this.touching = this.touching.filter(gameObject => gameObject.hit && !gameObject.dead);
+        this.touching.forEach(gameObj => {
+            gameObj.hit();
+            if(gameObj.dead) gameObj.destroy();
+        })
+    }
+
+    onDeath = () => {
+        this.anims.stop();
+        // this.setTexture('green_ninja_dead')
+        this.setOrigin(0.5);
+        this.spriteWeapon.destroy();
     }
 }

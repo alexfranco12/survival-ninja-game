@@ -19,13 +19,18 @@ const config = {
             },
         }
     },
+    // Install the scene plugin
     plugins: {
         scene: [
-            {
-                plugin: PhaserMatterCollisionPlugin,
-                key: 'matterCollision',
-                mapping: 'matterCollision'
-            }
+        {
+            plugin: PhaserMatterCollisionPlugin.default, // The plugin class
+            key: "matterCollision", // Where to store in Scene.Systems, e.g. scene.sys.matterCollision
+            mapping: "matterCollision" // Where to store in the Scene, e.g. scene.matterCollision
+
+            // Note! If you are including the library via the CDN script tag, the plugin 
+            // line should be:
+            // plugin: PhaserMatterCollisionPlugin.default
+        }
         ]
     }
 }

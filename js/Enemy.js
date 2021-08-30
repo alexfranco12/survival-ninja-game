@@ -1,0 +1,144 @@
+import MatterEntity from "./MatterEntity.js";
+
+export default class Enemy extends MatterEntity {
+    static preload(scene) {
+        scene.load.spritesheet('snake', 'assets/Actor/Monsters/Snake.png', 
+        { 
+            frameWidth: 16, 
+            frameHeight: 16, 
+            endFrame: 16 
+        });
+        scene.load.spritesheet('lizard', 'assets/Actor/Monsters/Lizard.png', 
+        { 
+            frameWidth: 16, 
+            frameHeight: 16, 
+            endFrame: 16 
+        });
+
+        scene.load.audio('snake', 'assets/Sounds/Game/Hit.wav');
+        scene.load.audio('lizard', 'assets/Sounds/Game/Hit.wav');
+    }
+
+    constructor(data) {
+        let {scene, enemy} = data;
+        let drops = enemy.properties.find(p => p.name == 'drops').value;
+        let health = enemy.properties.find(p => p.name == 'health').value;
+
+        super({
+            scene,
+            x: enemy.x,
+            y: enemy.y,
+            texture: enemy.type,
+            drops, 
+            health,
+            name: enemy.type,
+        })
+
+        const {Body, Bodies} = Phaser.Physics.Matter.Matter;
+        let enemyCollider = Bodies.circle(this.x, this.y, 12, {
+            isSensor: false, 
+            label: 'enemyCollider'
+        })
+
+        // large sensor for enemies
+        let enemySensor = Bodies.circle(this.x, this.y, 80, {
+            isSensor: true, 
+            label: 'enemySensor'
+        })
+        const compoundBody = Body.create({
+            parts: [ enemyCollider, enemySensor ],
+            frictionAir: 0.35
+        });
+
+        // stops the player from rotating when interacted with
+        this.setExistingBody(compoundBody);
+        this.setFixedRotation();
+
+        this.createAnimations();
+
+        this.scene.matterCollision.addOnCollideStart({
+            objectA: [enemySensor],
+            callback: other => {
+                if (other.gameObjectB && other.gameObjectB.name == 'player') {
+                    this.attacking = other.gameObjectB;
+                }
+            },
+            context: scene,
+        })
+    }
+
+    attack = (target) => {
+        if (target.dead || this.dead) {
+            clearInterval(this.attacktimer);
+            return;
+        } else {
+            target.hit();
+        }
+    }
+
+    createAnimations() {
+        // SNAKE
+        this.anims.create({
+            key: 'snake_idle',
+            frames: this.anims.generateFrameNumbers('snake', { 
+                frames: [0]
+            }),
+            frameRate: 0,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'snake_walk',
+            frames: this.anims.generateFrameNumbers('snake', { 
+                frames: [3, 7, 11, 15]
+            }),
+            frameRate: 10,
+            repeat: -1
+        });
+        
+        // LIZARD
+        this.anims.create({
+            key: 'lizard_idle',
+            frames: this.anims.generateFrameNumbers('lizard', { 
+                frames: [0]
+            }),
+            frameRate: 0,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'lizard_walk',
+            frames: this.anims.generateFrameNumbers('lizard', { 
+                frames: [3, 7, 11, 15]
+            }),
+            frameRate: 10,
+            repeat: -1
+        });
+    }
+
+    update() {
+        if (this.dead) return;
+        if (this.attacking) {
+            let direction = this.attacking.position.subtract(this.position);
+            if (direction.length() > 24) {
+                let v = direction.normalize();
+                this.setVelocityX(direction.x);
+                this.setVelocityY(direction.y);
+                if (this.attacktimer) {
+                    clearInterval(this.attackTimer);
+                    this.attackTimer = null;
+                }
+            } else {
+                if (this.attacktimer == null) {
+                    this.attacktimer = setInterval(this.attack, 500, this.attacking);
+                }
+            }
+        }
+
+        this.setFlipX(this.velocity.x < 0);
+
+        if (Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.y) > 0.1) {
+            this.anims.play(`${this.name}_walk`, true)
+        } else {
+            this.anims.play(`${this.name}_idle`, true)
+        }
+    }
+}

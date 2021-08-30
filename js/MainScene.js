@@ -1,27 +1,28 @@
+import Enemy from "./Enemy.js";
 import Player from "./Player.js";
+import Resource from "./Resource.js";
 
 export default class MainScene extends Phaser.Scene {
     constructor() {
         super('MainScene');
+        this.enemies = [];
     }
 
     preload() {
         Player.preload(this);
+        Resource.preload(this);
+        Enemy.preload(this);
+
         this.load.image('floor', 'assets/Backgrounds/Tilesets/TilesetFloor.png');
         this.load.image('water', 'assets/Backgrounds/Tilesets/TilesetWater.png');
         this.load.tilemapTiledJSON('map', 'assets/map.json')
-
-        this.load.spritesheet('nature', 'assets/Backgrounds/Tilesets/TilesetNature.png', 
-        { 
-            frameWidth: 32, 
-            frameHeight: 32, 
-            endFrame: 8 
-        });
+        
     }
 
     create() {
         // create a tilemap
         const map = this.make.tilemap({ key: 'map' });
+        this.map = map;
 
         // create tilesets w/ .PNGs we loaded
         const tileset = map.addTilesetImage('TilesetFloor', 'floor', 16, 16, 0, 0);
@@ -35,15 +36,22 @@ export default class MainScene extends Phaser.Scene {
         layer3.setCollisionByProperty({ collides: true });
         this.matter.world.convertTilemapLayer(layer3);
 
-        let tree = new Phaser.Physics.Matter.Sprite(this.matter.world, 250, 100, 'nature');
+        /* 
+            ADD NATURE TO THE WORLD
+        */
+        this.map.getObjectLayer('Resources').objects.forEach(resource => new Resource({
+            scene: this, 
+            resource
+        }));
 
+        /* 
+            ADD ENEMIES TO THE WORLD
+        */
+        this.map.getObjectLayer('Enemies').objects.forEach(enemy => this.enemies.push(new Enemy({scene: this, enemy})));
 
-        // add nature sprites to world
-        this.add.existing(tree).setStatic(true);
-
-
-
-
+        /*
+            ADD CHARACTERS TO THE WORLD
+        */
         // create a new player
         this.player = new Player({
             scene: this, 
@@ -52,16 +60,6 @@ export default class MainScene extends Phaser.Scene {
             texture: 'green_ninja_idle', 
             frame: 0
         });
-
-        // create a test player
-        let testPlayer = new Player({
-            scene: this, 
-            x: 200, 
-            y: 200, 
-            texture: 'green_ninja_idle', 
-            frame: 3
-        });
-        
 
         // player movement keys ( w, s, d, a )
         this.player.inputKeys = this.input.keyboard.addKeys({
@@ -77,5 +75,6 @@ export default class MainScene extends Phaser.Scene {
 
     update() {
         this.player.update();
+        this.enemies.forEach(enemy => enemy.update())
     }
 }
