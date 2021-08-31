@@ -61,6 +61,7 @@ export default class Enemy extends MatterEntity {
         this.setExistingBody(compoundBody);
         this.setFixedRotation();
 
+        // create enemy animations
         this.createAnimations();
 
         this.scene.matterCollision.addOnCollideStart({
@@ -165,5 +166,10 @@ export default class Enemy extends MatterEntity {
         } else {
             this.anims.play(`${this.name}_idle`, true)
         }
+    }
+
+    // event for when enemies die
+    onDeath = () => {
+        this.destroy();
     }
 }

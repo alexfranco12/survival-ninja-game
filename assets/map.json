@@ -4072,6 +4072,10 @@
                          "value":""
                         }],
                  "type":"rock_4"
+                }, 
+                {
+                 "id":224,
+                 "type":"orange_crystal"
                 }],
          "tilewidth":16
         }, 
@@ -4861,7 +4865,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":""
+                         "value":"2"
                         }, 
                         {
                          "name":"health",
@@ -4881,7 +4885,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":""
+                         "value":"2"
                         }, 
                         {
                          "name":"health",
@@ -4901,7 +4905,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":""
+                         "value":"2"
                         }, 
                         {
                          "name":"health",
@@ -4921,7 +4925,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":""
+                         "value":"2"
                         }, 
                         {
                          "name":"health",
@@ -4941,7 +4945,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":""
+                         "value":"2"
                         }, 
                         {
                          "name":"health",
@@ -4961,7 +4965,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":""
+                         "value":"2"
                         }, 
                         {
                          "name":"health",
@@ -4981,7 +4985,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":""
+                         "value":"2"
                         }, 
                         {
                          "name":"health",
@@ -5001,7 +5005,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":""
+                         "value":"2"
                         }, 
                         {
                          "name":"health",
@@ -5021,7 +5025,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":""
+                         "value":"2"
                         }, 
                         {
                          "name":"health",
@@ -5041,7 +5045,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":""
+                         "value":"2"
                         }, 
                         {
                          "name":"health",
@@ -5061,7 +5065,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":""
+                         "value":"2"
                         }, 
                         {
                          "name":"health",
@@ -5081,7 +5085,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":""
+                         "value":"2"
                         }, 
                         {
                          "name":"health",
@@ -5101,7 +5105,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":""
+                         "value":"2"
                         }, 
                         {
                          "name":"health",
@@ -5121,7 +5125,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":""
+                         "value":"2"
                         }, 
                         {
                          "name":"health",
@@ -5141,7 +5145,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":""
+                         "value":"2"
                         }, 
                         {
                          "name":"health",
@@ -5161,7 +5165,7 @@
                         {
                          "name":"drops",
                          "type":"string",
-                         "value":""
+                         "value":"2"
                         }, 
                         {
                          "name":"health",

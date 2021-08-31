@@ -15,7 +15,9 @@ export default class MatterEntity extends Phaser.Physics.Matter.Sprite {
 
         // underscore used when utilizing a getter function
         this._position = new Phaser.Math.Vector2(this.x, this.y);
+
         if (this.name) this.sound = this.scene.sound.add(this.name)
+        
         this.scene.add.existing(this);
     }
 
@@ -32,6 +34,7 @@ export default class MatterEntity extends Phaser.Physics.Matter.Sprite {
         return this.health <= 0;
     }
 
+    // death setting for every entity in the game
     onDeath = () => {
 
     };
@@ -39,7 +42,6 @@ export default class MatterEntity extends Phaser.Physics.Matter.Sprite {
     hit = () => {
         if(this.sound) this.sound.play();
         this.health--;
-        console.log(`Hitting: ${this.name} \nHealth: ${this.health} \nName: ${this.name}`);
 
         // if resource is detroyed
         if (this.name == 'tree_1' && this.dead) {

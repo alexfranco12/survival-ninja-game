@@ -48,7 +48,10 @@ export default class MainScene extends Phaser.Scene {
         /* 
             ADD ENEMIES TO THE WORLD
         */
-        this.map.getObjectLayer('Enemies').objects.forEach(enemy => this.enemies.push(new Enemy({scene: this, enemy})));
+        this.map.getObjectLayer('Enemies').objects.forEach(enemy => this.enemies.push(new Enemy({
+            scene: this, 
+            enemy
+        })));
 
         /*
             ADD CHARACTERS TO THE WORLD
@@ -81,10 +84,6 @@ export default class MainScene extends Phaser.Scene {
         camera.startFollow(this.player);
         camera.setLerp(0.1, 0.1);
         camera.zoom = 1.25;
-
-        
-
-       
     }
 
     update() {

@@ -24,7 +24,7 @@ export default class Player extends MatterEntity {
         let {scene, x, y, texture, frame} = data;
         super({
             ...data,
-            health: 20,
+            health: 5,
             drops: [],
             name: 'player'
         });
@@ -210,18 +210,24 @@ export default class Player extends MatterEntity {
         })
     }
 
+    // event for attacking
     whackStuff() {
         this.touching = this.touching.filter(gameObject => gameObject.hit && !gameObject.dead);
         this.touching.forEach(gameObj => {
             gameObj.hit();
-            if(gameObj.dead) gameObj.destroy();
         })
     }
 
+    // event for when the main player dies
     onDeath = () => {
         this.anims.stop();
         this.setTexture('green_ninja_dead')
         this.setOrigin(0.5);
         this.spriteWeapon.destroy();
+
+        this.scene.add.text(this.x - 55, this.y - 32, 'Game Over', { 
+            fontSize: '20px', 
+            fill: '#000000' 
+        });
     }
 }

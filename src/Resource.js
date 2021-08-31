@@ -39,4 +39,8 @@ export default class Resource extends MatterEntity {
         this.setExistingBody(circleCollider);
         this.setStatic(true)
     }
+
+    onDeath = () => {
+        this.destroy();
+    }
 }
