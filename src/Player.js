@@ -8,7 +8,7 @@ export default class Player extends MatterEntity {
             frameHeight: 16, 
             endFrame: 4 
         });
-        scene.load.spritesheet('green_ninja_walk', './assets//Actor/Characters/GreenNinja/SeparateAnim/Walk.png', 
+        scene.load.spritesheet('green_ninja_walk', './assets/Actor/Characters/GreenNinja/SeparateAnim/Walk.png', 
         { 
             frameWidth: 16, 
             frameHeight: 16, 
@@ -16,7 +16,7 @@ export default class Player extends MatterEntity {
         });
 
         scene.load.audio('player', '../assets/Sounds/Game/Sword2.wav')
-        scene.load.image('axe', '../assets/Items/Weapons/Axe/sprite.png')
+        scene.load.image('axe', '../assets/Items/Weapons/Axe/Sprite.png')
         scene.load.image('green_ninja_dead', '../assets/Actor/Characters/GreenNinja/SeparateAnim/Dead.png')
     }
     
