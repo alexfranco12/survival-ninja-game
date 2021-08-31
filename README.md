@@ -37,7 +37,7 @@ Pack Page: https://pixel-boy.itch.io/ninja-adventure-asset-pack
 - [x] Create a main player
 - [x] Create enemies
 - [x] Create nature resources
-- [ ] Create a win/lose situation
+- [x] Create a win/lose situation
 
 ## Major Hurdles
 - Create animation for when player is running in curtain directions
@@ -49,15 +49,26 @@ Pack Page: https://pixel-boy.itch.io/ninja-adventure-asset-pack
 - Deploying with all images displaying properly
 
 ## Stretch Goals
+#### Map
+- [ ] Add background music
+- [ ] Fix overlapping objects
+- [ ] Create more loot that drops from objects when destroyed
 - [ ] Create more locations to travel through
-- [ ] Create an inventory
+- [ ] Create buildings to enter
 - [ ] Create NPCs
-- [ ] Create enemies with projectiles
-- [ ] Create more weapons
+
+#### Player
+- [ ] Display Health Bar
 - [ ] Swing weapon in the direction the ninja is facing
-- [ ] Create boss levels
-- [ ] Enter buildings
+- [ ] Create an inventory
+- [ ] Create more weapons
 - [ ] Buy and sell items
+
+#### Enemies
+- [ ] Create enemies with projectiles
+- [ ] Each type of enemies has different attack speeds
+- [ ] Create boss levels
+
 
 ## Credits
 - Codecademy - Game Development with Phaser.js

@@ -16,8 +16,10 @@ export default class MatterEntity extends Phaser.Physics.Matter.Sprite {
         // underscore used when utilizing a getter function
         this._position = new Phaser.Math.Vector2(this.x, this.y);
 
+        // add sounds associated with entity
         if (this.name) this.sound = this.scene.sound.add(this.name)
         
+        // add entity to game
         this.scene.add.existing(this);
     }
 

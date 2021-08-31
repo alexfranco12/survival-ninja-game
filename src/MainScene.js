@@ -6,6 +6,7 @@ export default class MainScene extends Phaser.Scene {
     constructor() {
         super('MainScene');
         this.enemies = [];
+        this.totalDead = 0
     }
 
     preload() {
@@ -35,8 +36,6 @@ export default class MainScene extends Phaser.Scene {
         layer3.setCollisionByProperty({ collides: true });
         this.matter.world.convertTilemapLayer(layer3);
 
-        // this.matter.world.setBounds(0, 0, 1024, 512);
-
         /* 
             ADD NATURE TO THE WORLD
         */
@@ -52,6 +51,8 @@ export default class MainScene extends Phaser.Scene {
             scene: this, 
             enemy
         })));
+
+        this.numberDead = 0
 
         /*
             ADD CHARACTERS TO THE WORLD

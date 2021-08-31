@@ -24,7 +24,7 @@ export default class Player extends MatterEntity {
         let {scene, x, y, texture, frame} = data;
         super({
             ...data,
-            health: 5,
+            health: 10,
             drops: [],
             name: 'player'
         });
@@ -108,8 +108,6 @@ export default class Player extends MatterEntity {
     update() {
         const speed = 2.5;
         let playerVelocity = new Phaser.Math.Vector2();
-
-        // this.scene.cameras.main.centerOn(this.x, this.y)
 
         if (this.dead) {
             return;

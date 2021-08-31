@@ -12,8 +12,12 @@ export default class StartScene extends Phaser.Scene {
             fontSize: '36px', 
             fill: '#000000' 
         });
-        this.add.text(75, 150, 'Click to Start!', { 
-            fontSize: '24px', 
+        this.add.text(20, 160, 'Defeat all enemies to win!', { 
+            fontSize: '18px', 
+            fill: '#000000' 
+        });
+        this.add.text(75, 210, 'Click to Start', { 
+            fontSize: '18px', 
             fill: '#000000' 
         });
 

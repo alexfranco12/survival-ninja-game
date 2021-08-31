@@ -75,15 +75,6 @@ export default class Enemy extends MatterEntity {
         })
     }
 
-    attack = (target) => {
-        if (target.dead || this.dead) {
-            clearInterval(this.attackTimer);
-            return;
-        } else {
-            target.hit();
-        }
-    }
-
     createAnimations() {
         // SNAKE
         this.anims.create({
@@ -154,6 +145,7 @@ export default class Enemy extends MatterEntity {
                 }
             } else {
                 if (this.attackTimer == null) {
+                    // set attack speed
                     this.attackTimer = setInterval(this.attack, 500, this.attacking);
                 }
             }
@@ -168,8 +160,25 @@ export default class Enemy extends MatterEntity {
         }
     }
 
+    attack = (target) => {
+        if (target.dead || this.dead) {
+            clearInterval(this.attackTimer);
+            return;
+        } else {
+            target.hit();
+        }
+    }
+
     // event for when enemies die
     onDeath = () => {
+        this.scene.totalDead++;
+        if(this.scene.totalDead === this.scene.enemies.length) {
+            this.scene.add.text(this.x - 55, this.y - 32, 'You Win!', { 
+                fontSize: '20px', 
+                fill: '#000000' 
+            });
+            this.scene.player.anims.stop();
+        }
         this.destroy();
     }
 }
