@@ -4,7 +4,7 @@ export default class StartScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('ninja', 'assets/Backgrounds/intro_ninja.png')
+        this.load.image('ninja', './assets/Backgrounds/intro_ninja.png')
     }
 
     create() {

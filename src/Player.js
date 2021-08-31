@@ -2,22 +2,22 @@ import MatterEntity from "./MatterEntity.js";
 
 export default class Player extends MatterEntity {
     static preload(scene) {
-        scene.load.spritesheet('green_ninja_idle', 'assets/Actor/Characters/GreenNinja/SeparateAnim/Idle.png', 
+        scene.load.spritesheet('green_ninja_idle', './assets/Actor/Characters/GreenNinja/SeparateAnim/Idle.png', 
         { 
             frameWidth: 16, 
             frameHeight: 16, 
             endFrame: 4 
         });
-        scene.load.spritesheet('green_ninja_walk', 'assets//Actor/Characters/GreenNinja/SeparateAnim/Walk.png', 
+        scene.load.spritesheet('green_ninja_walk', './assets//Actor/Characters/GreenNinja/SeparateAnim/Walk.png', 
         { 
             frameWidth: 16, 
             frameHeight: 16, 
             endFrame: 16 
         });
 
-        scene.load.audio('player', '/assets/Sounds/Game/Sword2.wav')
-        scene.load.image('axe', '/assets/Items/Weapons/Axe/sprite.png')
-        scene.load.image('green_ninja_dead', '/assets/Actor/Characters/GreenNinja/SeparateAnim/Dead.png')
+        scene.load.audio('player', './assets/Sounds/Game/Sword2.wav')
+        scene.load.image('axe', './assets/Items/Weapons/Axe/sprite.png')
+        scene.load.image('green_ninja_dead', './assets/Actor/Characters/GreenNinja/SeparateAnim/Dead.png')
     }
     
     constructor(data) {

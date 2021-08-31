@@ -13,10 +13,9 @@ export default class MainScene extends Phaser.Scene {
         Resource.preload(this);
         Enemy.preload(this);
 
-        this.load.image('floor', 'assets/Backgrounds/Tilesets-Extruded/TilesetFloor-extruded.png');
-        this.load.image('water', 'assets/Backgrounds/Tilesets/TilesetWater.png');
-        this.load.tilemapTiledJSON('map', 'assets/map.json')
-        
+        this.load.image('floor', './assets/Backgrounds/Tilesets-Extruded/TilesetFloor-extruded.png');
+        this.load.image('water', './assets/Backgrounds/Tilesets/TilesetWater.png');
+        this.load.tilemapTiledJSON('map', './assets/map.json')
     }
 
     create() {

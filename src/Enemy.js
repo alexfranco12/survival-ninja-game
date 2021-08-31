@@ -2,21 +2,21 @@ import MatterEntity from "./MatterEntity.js";
 
 export default class Enemy extends MatterEntity {
     static preload(scene) {
-        scene.load.spritesheet('snake', 'assets/Actor/Monsters/Snake.png', 
+        scene.load.spritesheet('snake', './assets/Actor/Monsters/Snake.png', 
         { 
             frameWidth: 16, 
             frameHeight: 16, 
             endFrame: 16 
         });
-        scene.load.spritesheet('lizard', 'assets/Actor/Monsters/Lizard.png', 
+        scene.load.spritesheet('lizard', './assets/Actor/Monsters/Lizard.png', 
         { 
             frameWidth: 16, 
             frameHeight: 16, 
             endFrame: 16 
         });
 
-        scene.load.audio('snake', 'assets/Sounds/Game/Hit.wav');
-        scene.load.audio('lizard', 'assets/Sounds/Game/Hit.wav');
+        scene.load.audio('snake', './assets/Sounds/Game/Hit.wav');
+        scene.load.audio('lizard', './assets/Sounds/Game/Hit.wav');
     }
 
     constructor(data) {
