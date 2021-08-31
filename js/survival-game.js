@@ -4,7 +4,7 @@ import StartScene from "./StartScene.js";
 const config = {
     width: 512,
     height: 368,
-    backgroundColor: '#999999',
+    backgroundColor: '#FFFFFF',
     type: Phaser.AUTO,
     parent: 'survival-game',
     scene: [ StartScene, MainScene ],

@@ -78,8 +78,6 @@ export default class MainScene extends Phaser.Scene {
             CAMARA
         */
         let camera = this.cameras.main;
-        console.log(this.game.height)
-        console.log(this.game.height)
         camera.setBounds(0, 0, 1024, 512);
         camera.startFollow(this.player);
         camera.setLerp(0.1, 0.1);
