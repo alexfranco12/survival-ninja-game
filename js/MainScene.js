@@ -13,7 +13,7 @@ export default class MainScene extends Phaser.Scene {
         Resource.preload(this);
         Enemy.preload(this);
 
-        this.load.image('floor', 'assets/Backgrounds/Tilesets/TilesetFloor.png');
+        this.load.image('floor', 'assets/Backgrounds/Tilesets-Extruded/TilesetFloor-extruded.png');
         this.load.image('water', 'assets/Backgrounds/Tilesets/TilesetWater.png');
         this.load.tilemapTiledJSON('map', 'assets/map.json')
         
@@ -25,7 +25,7 @@ export default class MainScene extends Phaser.Scene {
         this.map = map;
 
         // create tilesets w/ .PNGs we loaded
-        const tileset = map.addTilesetImage('TilesetFloor', 'floor', 16, 16, 0, 0);
+        const tileset = map.addTilesetImage('TilesetFloor', 'floor', 16, 16, 1, 2);
         const waterTileset = map.addTilesetImage('TilesetWater', 'water', 16, 16, 0, 0);
         
         // create variables for each layer created in TILED
@@ -35,6 +35,8 @@ export default class MainScene extends Phaser.Scene {
 
         layer3.setCollisionByProperty({ collides: true });
         this.matter.world.convertTilemapLayer(layer3);
+
+        // this.matter.world.setBounds(0, 0, 1024, 512);
 
         /* 
             ADD NATURE TO THE WORLD
@@ -71,6 +73,21 @@ export default class MainScene extends Phaser.Scene {
 
         // create player animations
         this.player.createAnimations();
+
+        /* 
+            CAMARA
+        */
+        let camera = this.cameras.main;
+        console.log(this.game.height)
+        console.log(this.game.height)
+        camera.setBounds(0, 0, 1024, 512);
+        camera.startFollow(this.player);
+        camera.setLerp(0.1, 0.1);
+        camera.zoom = 1.25;
+
+        
+
+       
     }
 
     update() {
