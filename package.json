@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "phaser": "^3.55.2",
+    "phaser-matter-collision-plugin": "^1.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0"
+  }
+}
