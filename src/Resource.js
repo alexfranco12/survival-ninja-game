@@ -2,7 +2,7 @@ import MatterEntity from "./MatterEntity.js";
 
 export default class Resource extends MatterEntity {
     static preload(scene) {
-        scene.load.atlas('nature_resources', '../assets/atlas/nature_resources.png', '../assets/Atlas/nature_resources_atlas.json')
+        scene.load.atlas('nature_resources', './assets/Atlas/nature_resources.png', './assets/Atlas/nature_resources_atlas.json')
 
         // load sounds
         scene.load.audio('tree_1', './assets/Sounds/Game/Hit.wav');

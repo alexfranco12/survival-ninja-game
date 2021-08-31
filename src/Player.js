@@ -15,9 +15,9 @@ export default class Player extends MatterEntity {
             endFrame: 16 
         });
 
-        scene.load.audio('player', '../assets/Sounds/Game/Sword2.wav')
-        scene.load.image('axe', '../assets/Items/Weapons/Axe/Sprite.png')
-        scene.load.image('green_ninja_dead', '../assets/Actor/Characters/GreenNinja/SeparateAnim/Dead.png')
+        scene.load.audio('player', './assets/Sounds/Game/Sword2.wav')
+        scene.load.image('axe', './assets/Items/Weapons/Axe/Sprite.png')
+        scene.load.image('green_ninja_dead', './assets/Actor/Characters/GreenNinja/SeparateAnim/Dead.png')
     }
     
     constructor(data) {
