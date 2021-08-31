@@ -8,6 +8,7 @@ export default class Resource extends MatterEntity {
         scene.load.audio('tree_1', './assets/Sounds/Game/Hit.wav');
         scene.load.audio('rock_3', './assets/Sounds/Game/Hit.wav');
         scene.load.audio('rock_4', './assets/Sounds/Game/Hit.wav');
+        scene.load.audio('stump_3', './assets/Sounds/Game/Hit.wav');
         scene.load.audio('success', './assets/Sounds/Game/Success1.wav');
     }
     

@@ -14,9 +14,16 @@ export default class Enemy extends MatterEntity {
             frameHeight: 16, 
             endFrame: 16 
         });
+        scene.load.spritesheet('mushroom', './assets/Actor/Monsters/Mushroom.png', 
+        { 
+            frameWidth: 16, 
+            frameHeight: 16, 
+            endFrame: 16 
+        });
 
         scene.load.audio('snake', './assets/Sounds/Game/Hit.wav');
         scene.load.audio('lizard', './assets/Sounds/Game/Hit.wav');
+        scene.load.audio('mushroom', './assets/Sounds/Game/Hit.wav');
     }
 
     constructor(data) {
@@ -81,7 +88,7 @@ export default class Enemy extends MatterEntity {
         this.anims.create({
             key: 'snake_idle',
             frames: this.anims.generateFrameNumbers('snake', { 
-                frames: [0]
+                frames: [0, 4, 8, 12]
             }),
             frameRate: 0,
             repeat: -1
@@ -99,7 +106,7 @@ export default class Enemy extends MatterEntity {
         this.anims.create({
             key: 'lizard_idle',
             frames: this.anims.generateFrameNumbers('lizard', { 
-                frames: [0]
+                frames: [0, 4, 8, 12]
             }),
             frameRate: 0,
             repeat: -1
@@ -107,6 +114,24 @@ export default class Enemy extends MatterEntity {
         this.anims.create({
             key: 'lizard_walk',
             frames: this.anims.generateFrameNumbers('lizard', { 
+                frames: [3, 7, 11, 15]
+            }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        // MUSHROOM
+        this.anims.create({
+            key: 'mushroom_idle',
+            frames: this.anims.generateFrameNumbers('mushroom', { 
+                frames: [0, 4, 8, 12]
+            }),
+            frameRate: 0,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'mushroom_walk',
+            frames: this.anims.generateFrameNumbers('mushroom', { 
                 frames: [3, 7, 11, 15]
             }),
             frameRate: 10,

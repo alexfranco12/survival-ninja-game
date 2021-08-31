@@ -24,7 +24,7 @@ export default class MainScene extends Phaser.Scene {
         this.map = map;
 
         // create tilesets w/ .PNGs we loaded
-        const tileset = map.addTilesetImage('TilesetFloor', 'floor', 16, 16, 1, 2);
+        const tileset = map.addTilesetImage('TilesetFloor-resized', 'floor', 16, 16, 1, 2);
         const waterTileset = map.addTilesetImage('TilesetWater', 'water', 16, 16, 0, 0);
         
         // create variables for each layer created in TILED
