@@ -4,14 +4,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/phaser-matter-collision-plugin"></script>
+    <link rel="stylesheet" href="style.css">
     <title>Survival Game</title>
 </head>
-<body>
-    <div id="survival-game"></div>
+<body class="homepage">
 
-    <script type="module" src="src/StartScene.js"></script>
-    <script type="module" src="src/survival-game.js"></script>
+    <!-- The video -->
+    <video autoplay muted loop id="video">
+    <source src="./assets/Backgrounds/Animated/animated_japan.mp4" type="video/mp4">
+    </video>
+  
+    <!-- Optional: some overlay text to describe the video -->
+    <div class="content">
+        <!-- title -->
+        <h1 class="heading">Ninja Survival Game</h1>
+
+        <div class="button-container">
+            <!-- play button -->
+            <a  class="button play-button" 
+            href="game.html"
+            > PLAY
+            </a>
+
+            <!-- play button -->
+            <button  
+                class="button instructions-button" 
+                id="open-modal"
+                > How To Play
+            </button>
+        </div>
+        
+    </div>
+
+
+    <!-- MODALS -->
+    <!-- instruction modal -->
+    <div class="modal about-modal" id="modal">
+        <div class="textbox about-textbox">
+            <h1>
+                <span>How To Play</span></br>
+                <span>Survival Ninja Game</span>
+            </h1>
+            <p>Explore the map and defeat all monster before they defeat you!</p>
+            <h4> Buttons </h4>
+            <p>a - move left</p>
+            <p>d - move right</p>
+            <p>w - move up</p>
+            <p>s - move down</p>
+            <p>left mouse click - attack</p>
+
+            <div class="modal-footer">
+                <!-- close modal -->
+                <button 
+                    class="button modal-close-button" 
+                    id="close-modal"
+                    > CLOSE
+                </button>
+            </div>
+
+        </div>
+  
+    </div>
+
+    
+    <!-- link to javascript file -->
+    <script src="./src/home_screen.js"></script>
 </body>
 </html>

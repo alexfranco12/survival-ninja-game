@@ -2,14 +2,18 @@ import MainScene from "./MainScene.js";
 import StartScene from "./StartScene.js";
 
 const config = {
-    width: 512,
-    height: 368,
+    width: 800,
+    height: 600,
     backgroundColor: '#FFFFFF',
     type: Phaser.AUTO,
     parent: 'survival-game',
-    scene: [ StartScene, MainScene ],
+    scene: [ MainScene ],
     scale: {
-        zoom: 2,
+        parent: 'survival-game',
+        autoCenter: Phaser.Scale.FIT,
+        width: 480,
+        height: 360,
+        zoom: 2
     },
     physics: {
         default: 'matter',

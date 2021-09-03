@@ -1,0 +1,94 @@
+body {
+    display: flex;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 180px;
+}
+
+.button-container {
+    align-self: center;
+}
+
+.heading {
+    text-align: center;
+}
+
+.button {
+    align-self: center;
+    background: #000;
+    font-size: 18px;
+    padding: 10px;
+    margin: 10px;
+    height: auto;
+    width: 180px;
+    border: solid;
+    border-radius: 5px;
+	outline: none;
+	color: #fff;
+	cursor: pointer;
+}
+
+.play-button {
+    text-align: center;
+    text-emphasis: none;
+}
+
+
+/* Style the video: 100% width and height to cover the entire window */
+#video {
+    position: fixed;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%; 
+}
+  
+/* Add some content at the bottom of the video/page */
+.content {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+}
+  
+.button:hover {
+    background: #ddd;
+    color: black;
+}
+
+
+.modal {
+    display: none;
+	background-color: rgba(251, 219, 156, 0.35);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+    z-index: 5;
+}
+.textbox {
+	background-color: whitesmoke;
+	border-radius: 5px;
+	margin: 150px auto;
+	box-shadow: 0 3px 3px black;
+	padding: 4% 6%;
+}
+.textbox > h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+.about-textbox {
+    text-align: justify;
+    height: 400px;
+	width: 550px;
+}
+.modal-close-button {
+    width: 100px;
+    background-color: black;
+    color: white;
+}
