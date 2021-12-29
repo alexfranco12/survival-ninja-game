@@ -1,6 +1,6 @@
-import Enemy from "./Enemy.js";
-import Player from "./Player.js";
-import Resource from "./Resource.js";
+import Enemy from "../Enemy.js";
+import Player from "../Player.js";
+import Resource from "../Resource.js";
 
 export default class MainScene extends Phaser.Scene {
     constructor() {

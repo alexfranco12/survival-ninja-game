@@ -1,5 +1,4 @@
-import MainScene from "./MainScene.js";
-import StartScene from "./StartScene.js";
+import MainScene from "./src/scenes/MainScene.js";
 
 const config = {
   width: 512,
